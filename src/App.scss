@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+
+.hamburger-title {
+  display: flex;
+  > :nth-child(1) {
+    width: 17px;
+    height: 14px;
+    margin-right: 15px;
+    margin-top: 4px;
+  }
+  > :nth-child(2) {
+    width: 74.38px;
+    height: 16.8px;
+  }
+}
+
+.navbar {
+  width: 100%;
+  height: 60px;
+  padding: 15px 20px;
+}
+
+@media (max-width: 767px) {
+}
