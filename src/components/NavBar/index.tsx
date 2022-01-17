@@ -1,15 +1,17 @@
-import react from 'react'
-import HamburgerTitle from '../HamburgerTitle.tsx'
+import HamburgerTitle from '../HamburgerTitle'
 import Menu from '../Menu';
+import MainMenu from '../Menu/MainMenu';
+import SubMenu from '../Menu/SubMenu';
 
 interface NavBarProps {
 
 }
 
-const NavBar: React.FC<NavBarProps> = ({ }) => {
+const NavBar: React.FC<NavBarProps> = () => {
   return (<div className="navbar">
     <HamburgerTitle />
-    <Menu />
+    <MainMenu />
+    <SubMenu />
   </div>);
 }
 

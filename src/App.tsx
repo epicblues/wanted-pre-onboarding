@@ -3,11 +3,13 @@ import './App.scss';
 import NavBar from './components/NavBar';
 
 function App() {
-  return (
-    <>
+  return (<>
+    <div className="wrapper">
       <NavBar />
-      <div>body</div>
-    </>
+    </div>
+    <div>body</div>
+
+  </>
   );
 }
 
