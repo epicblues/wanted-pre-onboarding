@@ -1,5 +1,4 @@
 import HamburgerTitle from '../HamburgerTitle'
-import Menu from '../Menu';
 import MainMenu from '../Menu/MainMenu';
 import SubMenu from '../Menu/SubMenu';
 
