@@ -1,0 +1,22 @@
+.slider {
+  display: flex;
+  margin-top: 0%;
+
+  // overflow-x: auto;
+  width: 100%;
+  .banner {
+    img {
+      margin-top: 100px;
+      object-fit: cover;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+  }
+  transform: translateX(0px);
+}
+
+@media (min-width: 1200px) {
+}
+
+@media (max-width: 1199px) {
+}

@@ -36,7 +36,7 @@
   padding: 15px 0;
   svg {
     position: absolute;
-    right: -21px;
+    // right: -21px;
   }
 }
 
@@ -133,6 +133,7 @@
   }
   .main-menu {
     justify-content: space-evenly;
+    max-width: 590px;
     // width: fit-content;
   }
 
