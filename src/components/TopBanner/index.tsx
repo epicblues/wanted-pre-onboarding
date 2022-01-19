@@ -16,17 +16,6 @@ for (let i = 0; i <= 5; i++) {
   })
 }
 
-// style의 동적 제어 필요
-
-// 화면 size만큼 이동해야 한다.
-
-// 화면 size가 변경될 때마다 슬라이더와 이미지 크기가 변한다.
-
-// 첫번째 배너와 마지막 배너에 도착했을 때만 
-
-// transformX를 갖고 논다.
-
-
 
 const TopBanner = () => {
   // 이전 translateX를 보관하고 싶다.
@@ -34,13 +23,19 @@ const TopBanner = () => {
   const [resizer, setResizer] = useState(1);
   const [transition, setTransition] = useState('transform 0.2s');
 
+
+
   const docWidth = document.documentElement.offsetWidth;
+  const realWidth = docWidth >= 1200 ? 1050 : (docWidth) * 15 / 18;
+
   const onMouseDown: React.MouseEventHandler<HTMLDivElement> = (e) => {
-    const slider = e.currentTarget;
+
+    const slider = e.currentTarget
     const mouseX = e.clientX;
     const currentX = slider.style.transform.match(/\d+/) ? +(slider.style.transform.match(/-{0,1}\d+/) as string[])[0] : 0;
-
+    console.log(slider)
     const onMouseMove: Parameters<typeof slider.addEventListener>[1] = (e) => {
+      console.log("MouseMove")
 
       function onMouseUp() {
         const moveDistance = (e as MouseEvent).clientX - mouseX
@@ -108,6 +103,13 @@ const TopBanner = () => {
         setTransition('transform 0.2s');
         return;
       })
+    const interval = setInterval(() => {
+      setCurrImg(currImg + 1);
+    }, 3000)
+
+    return () => {
+      clearInterval(interval);
+    }
   }, [transition, currImg])
 
 
@@ -116,24 +118,16 @@ const TopBanner = () => {
   const onArrowClick = (direction: "left" | "right") => {
 
 
-
-
     setCurrImg((currImage) => {
       if (direction === "left") {
-
-
         return currImage - 1;
-
       } else {
-
-
         return currImage + 1;
-
       }
     })
   }
   const medianWidth = docWidth / 2;
-  const initialX = medianWidth - (1050 / 2);
+  const initialX = medianWidth - (realWidth / 2);
 
   const onResize = () => {
     setResizer(resizer + 1);
@@ -143,7 +137,7 @@ const TopBanner = () => {
   window.addEventListener('resize', onResize)
   return (
     <>
-      <div className='slider' onMouseDown={onMouseDown} style={{ transform: `translateX(${initialX - 1050 * (currImg + 5)}px )`, transition }} ref={sliderRef} >
+      <div className='slider' onMouseDown={onMouseDown} style={{ transform: `translateX(${initialX - realWidth * (currImg + 5)}px )`, transition }} ref={sliderRef} >
 
         {banners.map((data, index) => (<Banner {...data} key={data.title} index={index} current={currImg} />))}
         {banners.map((data, index) => (<Banner {...data} key={data.title} index={index} current={currImg} />))}
