@@ -8,7 +8,10 @@ function App() {
     <div className="wrapper">
       <NavBar />
     </div>
-    <TopBanner />
+    <div className="banner-wrapper">
+      <TopBanner />
+
+    </div>
 
   </>
   );

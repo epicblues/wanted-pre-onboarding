@@ -1,13 +1,18 @@
 import React from 'react'
 
 interface ArrowProps {
-  direction: "left" | "right"
+  direction: "left" | "right",
+  onClick: Function
 }
 
-const Arrow: React.FC<ArrowProps> = () => {
-  return (
-    <div className='arrow'>
+const X = "10%";
+const Y = "200px"
 
+
+const Arrow: React.FC<ArrowProps> = ({ direction, onClick }) => {
+  return (
+    <div className='arrow' style={direction === 'left' ? { top: Y, left: X } : { top: Y, right: X }} onClick={() => { onClick(direction) }}>
+      {direction === "left" ? "<" : ">"}
     </div>
   )
 }
