@@ -40,17 +40,18 @@ const TopBanner = () => {
   const docWidth = document.documentElement.offsetWidth;
   const realWidth = docWidth >= 1200 ? 1050 : (docWidth) * 15 / 18;
 
-  const onMouseDown: React.MouseEventHandler<HTMLDivElement> = (e) => {
+  const onPointerDown: React.PointerEventHandler<HTMLDivElement> = (e) => {
 
     const slider = e.currentTarget
-    const mouseX = e.clientX;
+    const pointerX = e.clientX;
     const currentX = slider.style.transform.match(/\d+/) ? +(slider.style.transform.match(/-{0,1}\d+/) as string[])[0] : 0;
     console.log(slider)
-    const onMouseMove: Parameters<typeof slider.addEventListener>[1] = (e) => {
-      console.log("MouseMove")
+    const onPointerMove: Parameters<typeof slider.addEventListener>[1] = (e) => {
+      console.log("PointerMove")
 
-      function onMouseUp() {
-        const moveDistance = (e as MouseEvent).clientX - mouseX
+      function onPointerUp() {
+        const moveDistance = (e as PointerEvent).clientX - pointerX
+        console.log("pointerup");
         if (moveDistance > docWidth * 0.3) {
           setCurrImg(currImg - 1)
         } else if (moveDistance < -docWidth * 0.3) {
@@ -60,13 +61,13 @@ const TopBanner = () => {
           slider.style.transform = `translateX(${currentX}px)`
         }
 
-        slider.removeEventListener('mousemove', onMouseMove);
-        slider.removeEventListener('mouseup', onMouseUp);
-        slider.removeEventListener('mouseleave', onMouseleave)
+        slider.removeEventListener('pointermove', onPointerMove);
+        slider.removeEventListener('pointerup', onPointerUp);
+        slider.removeEventListener('pointerleave', onPointerleave)
       }
 
-      function onMouseleave() {
-        const moveDistance = (e as MouseEvent).clientX - mouseX
+      function onPointerleave() {
+        const moveDistance = (e as PointerEvent).clientX - pointerX
         if (moveDistance > docWidth * 0.3) {
           setCurrImg(currImg - 1)
         } else if (moveDistance < -docWidth * 0.3) {
@@ -75,21 +76,21 @@ const TopBanner = () => {
 
           slider.style.transform = `translateX(${currentX}px)`
         }
-        slider.removeEventListener('mousemove', onMouseMove);
-        slider.removeEventListener('mouseup', onMouseUp);
-        slider.removeEventListener('mouseleave', onMouseleave)
-
+        slider.removeEventListener('pointermove', onPointerMove);
+        slider.removeEventListener('pointerup', onPointerUp);
+        slider.removeEventListener('pointerleave', onPointerleave)
+        console.log("pointerLeave")
       }
 
 
-      slider.style.transform = `translateX(${currentX + (e as MouseEvent).clientX - mouseX}px)`
+      slider.style.transform = `translateX(${currentX + (e as PointerEvent).clientX - pointerX}px)`
 
-      slider.addEventListener('mouseup', onMouseUp)
-      slider.addEventListener('mouseleave', onMouseleave)
+      slider.addEventListener('pointerup', onPointerUp)
+      slider.addEventListener('pointerleave', onPointerleave)
 
 
     }
-    slider.addEventListener("mousemove", onMouseMove)
+    slider.addEventListener("pointermove", onPointerMove)
 
   }
 
@@ -141,7 +142,7 @@ const TopBanner = () => {
   window.addEventListener('resize', onResize)
   return (
     <>
-      <div className='slider' onMouseDown={onMouseDown} style={{ transform: `translateX(${initialX - realWidth * (currImg + 5)}px )`, transition }} ref={sliderRef} >
+      <div className='slider' onPointerDown={onPointerDown} style={{ transform: `translateX(${initialX - realWidth * (currImg + 5)}px )`, transition }} ref={sliderRef} >
 
         {banners.map((data, index) => (<Banner {...data} key={data.title} index={index} current={currImg} />))}
         {banners.map((data, index) => (<Banner {...data} key={data.title} index={index} current={currImg} />))}

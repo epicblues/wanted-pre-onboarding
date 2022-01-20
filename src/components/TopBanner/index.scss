@@ -54,6 +54,7 @@ $box-margin: 20px;
       width: 1020px;
       @include marginX(15px);
     }
+    touch-action: none;
   }
   .content-box {
     position: absolute;
@@ -130,8 +131,9 @@ $box-margin: 20px;
       }
     }
     justify-content: space-between;
-    width: 1500vw;
+    width: 1500%;
     overflow-y: hidden;
+    // z-index: 100;
   }
   .content-box {
     display: flex;
