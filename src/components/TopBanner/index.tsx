@@ -1,6 +1,6 @@
 import React, { MutableRefObject, useEffect, useRef, useState } from 'react'
 import Arrow from './Arrow'
-import { Banner, } from './Banner'
+import { Banner } from './Banner'
 import "./index.scss"
 
 // Loop 돌려서 얻을 데이터 작성
@@ -17,13 +17,25 @@ for (let i = 0; i <= 5; i++) {
 }
 
 
+interface BannerState {
+  currImg: number;
+  transition: "transform 0.2s" | "none";
+}
+
 const TopBanner = () => {
   // 이전 translateX를 보관하고 싶다.
-  const [currImg, setCurrImg] = useState(1);
+
   const [resizer, setResizer] = useState(1);
-  const [transition, setTransition] = useState('transform 0.2s');
+  const [{ currImg, transition }, setState] = useState<BannerState>({ currImg: 1, transition: "transform 0.2s" });
+  const setCurrImg = (num: number) => {
+    setState(state => {
+      return { ...state, currImg: num };
+    })
+  }
 
-
+  const setTransition = (str: BannerState['transition']) => {
+    setState(s => ({ ...s, transition: str }));
+  }
 
   const docWidth = document.documentElement.offsetWidth;
   const realWidth = docWidth >= 1200 ? 1050 : (docWidth) * 15 / 18;
@@ -85,16 +97,14 @@ const TopBanner = () => {
 
     if (currImg === 7) {
       setTimeout(res => {
-        setTransition("none");
-        setCurrImg(currImg - 6);
+        setState({ currImg: currImg - 6, transition: "none" })
       }, 300)
       return;
     }
 
     if (currImg === 0) {
       setTimeout(res => {
-        setTransition("none");
-        setCurrImg(currImg + 6);
+        setState({ currImg: currImg + 6, transition: "none" })
       }, 300)
       return;
     }
@@ -118,13 +128,7 @@ const TopBanner = () => {
   const onArrowClick = (direction: "left" | "right") => {
 
 
-    setCurrImg((currImage) => {
-      if (direction === "left") {
-        return currImage - 1;
-      } else {
-        return currImage + 1;
-      }
-    })
+    setCurrImg(direction === "left" ? currImg - 1 : currImg + 1)
   }
   const medianWidth = docWidth / 2;
   const initialX = medianWidth - (realWidth / 2);

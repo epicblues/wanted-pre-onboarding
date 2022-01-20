@@ -23,7 +23,7 @@ $box-margin: 20px;
   display: flex;
   margin-top: 0%;
 
-  overflow-x: visible;
+  // overflow-x: hidden;
   // justify-content: space-around;
   .banner {
     margin-top: 100px;
@@ -121,7 +121,8 @@ $box-margin: 20px;
 @media (max-width: 1199px) {
   .slider {
     .banner {
-      @include marginX(15px);
+      padding: 0px 0.1%;
+      width: 100%;
       img {
         height: 183px;
         width: 100%;
@@ -129,7 +130,8 @@ $box-margin: 20px;
       }
     }
     justify-content: space-between;
-    width: 1500%;
+    width: 1500vw;
+    overflow-y: hidden;
   }
   .content-box {
     display: flex;
