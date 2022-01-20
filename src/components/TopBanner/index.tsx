@@ -37,7 +37,7 @@ const TopBanner = () => {
     setState(s => ({ ...s, transition: str }));
   }
 
-  const docWidth = document.documentElement.offsetWidth;
+  const docWidth = document.documentElement.clientWidth;
   const realWidth = docWidth >= 1200 ? 1050 : (docWidth) * 15 / 18;
 
   const onPointerDown: React.PointerEventHandler<HTMLDivElement> = (e) => {
