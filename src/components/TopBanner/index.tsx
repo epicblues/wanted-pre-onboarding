@@ -36,12 +36,15 @@ const TopBanner = () => {
   const setTransition = (str: BannerState['transition']) => {
     setState(s => ({ ...s, transition: str }));
   }
-  console.log(document.documentElement.offsetWidth);
-  console.log(document.documentElement.scrollWidth);
 
-  const docWidth = document.documentElement.offsetWidth;
-  const scroll = document.documentElement.scrollWidth;
-  const realWidth = docWidth >= 1200 ? 1050 : (scroll) * 15 / 18;
+
+  const doc = document.documentElement;
+
+  const docWidth = window.innerWidth;
+  const scroll = document.body.clientWidth;
+  console.log(window.innerWidth, docWidth, scroll);
+
+  const realWidth = docWidth >= 1200 ? 1050 : (window.innerWidth) * 15 / 18;
 
   const onPointerDown: React.PointerEventHandler<HTMLDivElement> = (e) => {
 
