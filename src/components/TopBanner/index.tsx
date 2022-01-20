@@ -38,7 +38,6 @@ const TopBanner = () => {
   }
 
 
-  const doc = document.documentElement;
 
   const docWidth = window.innerWidth;
   const scroll = document.body.clientWidth;
